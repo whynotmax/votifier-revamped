@@ -85,7 +85,7 @@ public class Votifier extends JavaPlugin {
 		File config = new File(getDataFolder() + "/config.yml");
 		YamlConfiguration cfg = YamlConfiguration.loadConfiguration(config);
 		File rsaDirectory = new File(getDataFolder() + "/rsa");
-		// Replace to remove a bug with Windows paths - SmilingDevil
+		// Replace it to remove a bug with Windows paths - SmilingDevil
 		String listenerDirectory = getDataFolder().toString()
 				.replace("\\", "/") + "/listeners";
 
@@ -100,7 +100,7 @@ public class Votifier extends JavaPlugin {
 			hostAddr = "0.0.0.0";
 
 		/*
-		 * Create configuration file if it does not exists; otherwise, load it
+		 * Create a configuration file if it does not exist; otherwise, load it
 		 */
 		if (!config.exists()) {
 			try {
