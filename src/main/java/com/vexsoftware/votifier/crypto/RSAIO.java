@@ -1,5 +1,6 @@
 package com.vexsoftware.votifier.crypto;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -55,7 +56,13 @@ public class RSAIO {
 		File publicKeyFile = new File(directory, "public.key");
 		byte[] encodedPublicKey;
 		try (FileInputStream in = new FileInputStream(publicKeyFile)) {
-			encodedPublicKey = in.readAllBytes();
+			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+			int nRead;
+			byte[] data = new byte[16384];
+			while ((nRead = in.read(data, 0, data.length)) != -1) {
+			    buffer.write(data, 0, nRead);
+			}
+			encodedPublicKey = buffer.toByteArray();
 		}
 		byte[] decodedPublicKey = Base64.getDecoder().decode(encodedPublicKey);
 
@@ -63,7 +70,13 @@ public class RSAIO {
 		File privateKeyFile = new File(directory, "private.key");
 		byte[] encodedPrivateKey;
 		try (FileInputStream in = new FileInputStream(privateKeyFile)) {
-			encodedPrivateKey = in.readAllBytes();
+		    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+		    int nRead;
+		    byte[] data = new byte[16384];
+		    while ((nRead = in.read(data, 0, data.length)) != -1) {
+		        buffer.write(data, 0, nRead);
+		    }
+		    encodedPrivateKey = buffer.toByteArray();
 		}
 		byte[] decodedPrivateKey = Base64.getDecoder().decode(encodedPrivateKey);
 
